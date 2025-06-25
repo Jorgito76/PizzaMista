@@ -1,0 +1,13 @@
+{
+  "crusts": ["Thin", "Thick", "Cheese-Stuffed"],
+  "sauces": ["Tomato", "Pesto", "White Garlic"],
+  "cheeses": ["Mozzarella", "Cheddar", "Vegan"],
+  "toppings": [
+    "Pepperoni",
+    "Mushrooms",
+    "Onions",
+    "Basil",
+    "Pineapple",
+    "Olives"
+  ]
+}

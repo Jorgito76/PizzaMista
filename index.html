@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Build Your Own Pizza</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header>
+    <h1>🍕 Build Your Pizza</h1>
+  </header>
+  
+  <main>
+    <section id="builder">
+      <form id="pizza-form">
+        <h2>Choose Your Crust</h2>
+        <div id="crust-options"></div>
+
+        <h2>Choose Your Sauce</h2>
+        <div id="sauce-options"></div>
+
+        <h2>Choose Your Cheese</h2>
+        <div id="cheese-options"></div>
+
+        <h2>Choose Your Toppings</h2>
+        <div id="topping-options"></div>
+
+        <button type="submit">Preview Pizza</button>
+      </form>
+    </section>
+
+    <section id="preview">
+      <h2>Your Pizza Preview</h2>
+      <div id="pizza-visual"></div>
+      <p id="price-display"></p>
+      <button id="save-btn">Save to Favorites</button>
+    </section>
+
+    <section id="favorites">
+      <h2>Saved Pizzas</h2>
+      <div id="favorites-list"></div>
+    </section>
+  </main>
+
+  <script src="js/preview.js"></script>
+  <script src="js/storage.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
