@@ -1,51 +1,60 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
   <title>Build Your Own Pizza</title>
-  <link rel="stylesheet" href="style.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <header>
-    <h1>🍕 Build Your Pizza</h1>
-  </header>
-  
-  <main>
-    <section id="builder">
-      <form id="pizza-form">
-        <h2>Choose Your Crust</h2>
-        <div id="crust-options"></div>
+  <h1>Pizza Builder</h1>
 
-        <h2>Choose Your Sauce</h2>
-        <div id="sauce-options"></div>
+  <!-- Pizza Form -->
+  <form id="pizza-form">
+    <fieldset>
+      <legend>Choose Your Crust</legend>
+      <div id="crust-options"></div>
+    </fieldset>
 
-        <h2>Choose Your Cheese</h2>
-        <div id="cheese-options"></div>
+    <fieldset>
+      <legend>Choose Your Sauce</legend>
+      <div id="sauce-options"></div>
+    </fieldset>
 
-        <h2>Choose Your Toppings</h2>
-        <div id="topping-options"></div>
+    <fieldset>
+      <legend>Choose Your Cheese</legend>
+      <div id="cheese-options"></div>
+    </fieldset>
 
-        <button type="submit">Preview Pizza</button>
-      </form>
-    </section>
+    <fieldset>
+      <legend>Choose Toppings</legend>
+      <div id="topping-options"></div>
+    </fieldset>
 
-    <section id="preview">
-      <h2>Your Pizza Preview</h2>
-      <div id="pizza-visual"></div>
-      <p id="price-display"></p>
-      <button id="save-btn">Save to Favorites</button>
-    </section>
+    <p>Total Price: $<span id="price-display">8.00</span></p>
 
-    <section id="favorites">
-      <h2>Saved Pizzas</h2>
-      <div id="favorites-list"></div>
-    </section>
-  </main>
+    <button type="button" id="save-btn">Save to Favorites</button>
+    <button type="button" id="print-btn">Print Receipt</button>
+  </form>
 
-  <script src="js/preview.js"></script>
-  <script src="js/storage.js"></script>
+  <!-- Pizza Preview -->
+  <div id="pizza-visual"></div>
+
+  <!-- Favorites Section -->
+  <h2>Saved Pizzas</h2>
+  <div id="saved-pizzas"></div>
+
+  <!-- Hidden Printable Receipt -->
+  <div id="receipt" style="display: none;">
+    <h2>Pizza Order Receipt</h2>
+    <p><strong>Crust:</strong> <span id="receipt-crust"></span></p>
+    <p><strong>Sauce:</strong> <span id="receipt-sauce"></span></p>
+    <p><strong>Cheese:</strong> <span id="receipt-cheese"></span></p>
+    <p><strong>Toppings:</strong> <span id="receipt-toppings"></span></p>
+    <p><strong>Total Price:</strong> $<span id="receipt-price"></span></p>
+  </div>
+
+  <script src="preview.js"></script>
+  <script src="storage.js"></script>
   <script src="script.js"></script>
 </body>
 </html>
