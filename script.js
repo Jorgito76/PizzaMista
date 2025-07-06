@@ -58,15 +58,28 @@ document.getElementById('save-btn').addEventListener('click', () => {
 // Load saved pizzas when the page loads
 document.addEventListener('DOMContentLoaded', () => {
   fetch('data/ingredients.json')
-    .then(response => response.json())
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Failed to load ingredients.');
+      }
+      return response.json();
+    })
     .then(ingredients => {
       populateIngredients(ingredients);
+    })
+    .catch(error => {
+      console.error('Error loading ingredients:', error);
+      document.body.innerHTML = `
+        <h1>Oops!</h1>
+        <p>We couldn't load the pizza ingredients. Please try refreshing or check the JSON file.</p>
+      `;
     });
 
   document.getElementById('pizza-form').addEventListener('change', updatePrice);
   displaySavedPizzas();
   updatePrice();
 });
+
 
 // Print receipt
 document.getElementById('print-btn').addEventListener('click', () => {
@@ -89,8 +102,12 @@ document.getElementById('print-btn').addEventListener('click', () => {
 
 
 function loadPizzaToForm(pizza) {
-  const form = document.getElementById('pizza-form');
+  if (!pizza || !pizza.crust || !pizza.sauce || !pizza.cheese) {
+    alert("This saved pizza is missing some data.");
+    return;
+  }
 
+  const form = document.getElementById('pizza-form');
   form.crust.value = pizza.crust;
   form.sauce.value = pizza.sauce;
   form.cheese.value = pizza.cheese;
@@ -101,3 +118,4 @@ function loadPizzaToForm(pizza) {
 
   updatePrice();
 }
+
