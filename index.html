@@ -8,7 +8,7 @@
 <body>
   <h1>Pizza Builder</h1>
 
-  <!-- Pizza Form -->
+  <!-- Pizza Builder Form -->
   <form id="pizza-form">
     <fieldset>
       <legend>Choose Your Crust</legend>
@@ -37,13 +37,14 @@
   </form>
 
   <!-- Pizza Preview -->
+  <h2>Pizza Preview</h2>
   <div id="pizza-visual"></div>
 
-  <!-- Favorites Section -->
+  <!-- Saved Pizzas -->
   <h2>Saved Pizzas</h2>
   <div id="saved-pizzas"></div>
 
-  <!-- Hidden Printable Receipt -->
+  <!-- Hidden Receipt for Printing -->
   <div id="receipt" style="display: none;">
     <h2>Pizza Order Receipt</h2>
     <p><strong>Crust:</strong> <span id="receipt-crust"></span></p>
@@ -53,6 +54,10 @@
     <p><strong>Total Price:</strong> $<span id="receipt-price"></span></p>
   </div>
 
+  <!-- Accessible live region for screen reader alerts -->
+  <div id="alert" aria-live="polite" style="position: absolute; left: -9999px;"></div>
+
+  <!-- Scripts -->
   <script src="preview.js"></script>
   <script src="storage.js"></script>
   <script src="script.js"></script>

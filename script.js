@@ -8,18 +8,25 @@ function populateIngredients(ingredients) {
 
 function populateOptions(containerId, name, items, isCheckbox = false) {
   const container = document.getElementById(containerId);
-  items.forEach(item => {
+  items.forEach((item, index) => {
+    const inputId = `${name}-${index}`;
     const label = document.createElement('label');
+    label.setAttribute('for', inputId);
+
     const input = document.createElement('input');
     input.type = isCheckbox ? 'checkbox' : 'radio';
     input.name = name;
     input.value = item;
+    input.id = inputId;
+
     label.appendChild(input);
     label.append(` ${item}`);
+
     container.appendChild(label);
     container.appendChild(document.createElement('br'));
   });
 }
+
 
 // Update price dynamically
 function updatePrice() {
@@ -118,4 +125,10 @@ function loadPizzaToForm(pizza) {
 
   updatePrice();
 }
+
+function announce(message) {
+  const alertDiv = document.getElementById('alert');
+  alertDiv.textContent = message;
+}
+
 
