@@ -1,63 +1,52 @@
-// storage.js
-
-const STORAGE_KEY = 'savedPizzas';
-
-function savePizza(name, pizzaData) {
-  const saved = JSON.parse(localStorage.getItem(STORAGE_KEY)) || {};
-  saved[name] = pizzaData;
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(saved));
-}
-
-function loadSavedPizzas() {
-  return JSON.parse(localStorage.getItem(STORAGE_KEY)) || {};
-}
-
-function deletePizza(name) {
-  const saved = JSON.parse(localStorage.getItem(STORAGE_KEY)) || {};
-  delete saved[name];
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(saved));
-}
-
-function displaySavedPizzas() {
-  const list = document.getElementById('favorites-list');
-  list.innerHTML = '';
+// Save a pizza object under a custom name
+function savePizza(name, pizza) {
   const saved = loadSavedPizzas();
+  saved[name] = pizza;
+  localStorage.setItem('pizzas', JSON.stringify(saved));
+}
 
-  for (const [name, pizza] of Object.entries(saved)) {
+// Load all saved pizzas from localStorage
+function loadSavedPizzas() {
+  const raw = localStorage.getItem('pizzas');
+  return raw ? JSON.parse(raw) : {};
+}
+
+// Delete a pizza by name
+function deletePizza(name) {
+  const saved = loadSavedPizzas();
+  delete saved[name];
+  localStorage.setItem('pizzas', JSON.stringify(saved));
+}
+
+// Display saved pizzas in the UI
+function displaySavedPizzas() {
+  const saved = loadSavedPizzas();
+  const container = document.getElementById('saved-pizzas');
+  container.innerHTML = '';
+
+  Object.entries(saved).forEach(([name, pizza]) => {
     const card = document.createElement('div');
     card.className = 'pizza-card';
-    card.innerHTML = `
-      <strong>${name}</strong>
-      <p>Crust: ${pizza.crust}</p>
-      <p>Sauce: ${pizza.sauce}</p>
-      <p>Cheese: ${pizza.cheese}</p>
-      <p>Toppings: ${pizza.toppings.join(', ')}</p>
-      <button onclick="loadPizza('${name}')">Load</button>
-      <button onclick="deleteAndRefresh('${name}')">Delete</button>
-    `;
-    list.appendChild(card);
-  }
-}
 
-function loadPizza(name) {
-  const saved = loadSavedPizzas();
-  const pizza = saved[name];
-  if (!pizza) return;
+    const title = document.createElement('h3');
+    title.textContent = name;
 
-  // Populate the form with saved data
-  document.querySelector(`input[name='crust'][value='${pizza.crust}']`).checked = true;
-  document.querySelector(`input[name='sauce'][value='${pizza.sauce}']`).checked = true;
-  document.querySelector(`input[name='cheese'][value='${pizza.cheese}']`).checked = true;
+    const loadBtn = document.createElement('button');
+    loadBtn.textContent = 'Load';
+    loadBtn.addEventListener('click', () => {
+      loadPizzaToForm(pizza); // this function is in script.js
+    });
 
-  document.querySelectorAll(`input[name='toppings']`).forEach(input => {
-    input.checked = pizza.toppings.includes(input.value);
+    const deleteBtn = document.createElement('button');
+    deleteBtn.textContent = 'Delete';
+    deleteBtn.addEventListener('click', () => {
+      deletePizza(name);
+      displaySavedPizzas();
+    });
+
+    card.appendChild(title);
+    card.appendChild(loadBtn);
+    card.appendChild(deleteBtn);
+    container.appendChild(card);
   });
-
-  renderPizza(pizza);
-  document.getElementById('price-display').textContent = `Price: $${(8 + pizza.toppings.length * 0.5).toFixed(2)}`;
-}
-
-function deleteAndRefresh(name) {
-  deletePizza(name);
-  displaySavedPizzas();
 }

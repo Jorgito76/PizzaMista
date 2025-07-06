@@ -86,3 +86,18 @@ document.getElementById('print-btn').addEventListener('click', () => {
   window.print();
   receipt.style.display = 'none';
 });
+
+
+function loadPizzaToForm(pizza) {
+  const form = document.getElementById('pizza-form');
+
+  form.crust.value = pizza.crust;
+  form.sauce.value = pizza.sauce;
+  form.cheese.value = pizza.cheese;
+
+  form.querySelectorAll('input[name="toppings"]').forEach(input => {
+    input.checked = pizza.toppings.includes(input.value);
+  });
+
+  updatePrice();
+}

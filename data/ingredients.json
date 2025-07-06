@@ -1,13 +1,45 @@
 {
-  "crusts": ["Thin", "Thick", "Cheese-Stuffed"],
-  "sauces": ["Tomato", "Pesto", "White Garlic"],
-  "cheeses": ["Mozzarella", "Cheddar", "Vegan"],
+  "crusts": [
+    "Thin", 
+    "Thick", 
+    "Cheese-Stuffed",
+    "Gluten-Free",
+    "Whole Wheat",
+    "Cauliflower",
+    "Deep Dish",
+    "Flatbread"],
+  "sauces": [
+    "Tomato", 
+    "Pesto", 
+    "White Garlic",
+    "Barbecue",
+    "Buffalo",
+    "Alfredo",
+    "Spicy Arrabbiata",
+    "Truffle Cream"],
+  "cheeses": [
+    "Mozzarella", 
+    "Cheddar", 
+    "Vegan",
+    "Parmesan",
+    "Gorgonzola",
+    "Provolone",
+    "Goat Cheese",
+    "Ricotta"],
   "toppings": [
     "Pepperoni",
     "Mushrooms",
     "Onions",
     "Basil",
     "Pineapple",
-    "Olives"
+    "Olives",
+    "Green Peppers",
+    "Jalapeños",
+    "Spinach",
+    "Anchovies",
+    "Sausage",
+    "Tomatoes",
+    "Artichokes",
+    "Roasted Garlic"
   ]
 }
