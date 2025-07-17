@@ -82,6 +82,14 @@ document.addEventListener('DOMContentLoaded', () => {
       `;
     });
 
+  document.getElementById('pizza-form').addEventListener('change', () => {
+  updatePrice();
+  updatePreview();
+});
+
+  updatePrice();
+  updatePreview();
+
   document.getElementById('pizza-form').addEventListener('change', updatePrice);
   displaySavedPizzas();
   updatePrice();

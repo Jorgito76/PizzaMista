@@ -49,3 +49,32 @@ function getSauceColor(sauce) {
     default: return '#f5d6a1';
   }
 }
+
+function updatePreview() {
+  const visual = document.getElementById('pizza-visual');
+  visual.innerHTML = ''; // clear previous layers
+
+  const data = new FormData(document.getElementById('pizza-form'));
+
+  const crust = data.get('crust');
+  const sauce = data.get('sauce');
+  const cheese = data.get('cheese');
+  const toppings = data.getAll('toppings');
+
+  // Basic colored layers (could use images or emojis too)
+  addLayer(visual, sauce, 'rgba(255, 0, 0, 0.3)');
+  addLayer(visual, cheese, 'rgba(255, 255, 0, 0.3)');
+
+  toppings.forEach(topping => {
+    addLayer(visual, topping, 'rgba(0, 128, 0, 0.2)'); // same color for demo
+  });
+}
+
+function addLayer(container, label, color) {
+  const layer = document.createElement('div');
+  layer.className = 'topping-layer';
+  layer.style.backgroundColor = color;
+  layer.title = label;
+  container.appendChild(layer);
+}
+
