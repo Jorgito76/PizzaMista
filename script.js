@@ -1,4 +1,3 @@
-// Populate form with ingredient data
 function populateIngredients(ingredients) {
   populateOptions('crust-options', 'crust', ingredients.crusts);
   populateOptions('sauce-options', 'sauce', ingredients.sauces);
@@ -21,14 +20,11 @@ function populateOptions(containerId, name, items, isCheckbox = false) {
 
     label.appendChild(input);
     label.append(` ${item}`);
-
     container.appendChild(label);
     container.appendChild(document.createElement('br'));
   });
 }
 
-
-// Update price dynamically
 function updatePrice() {
   const basePrice = 8;
   const toppingPrice = 0.5;
@@ -38,37 +34,69 @@ function updatePrice() {
   document.getElementById('price-display').textContent = total.toFixed(2);
 }
 
-// Save pizza to localStorage
+function loadPizzaToForm(pizza) {
+  if (!pizza || !pizza.crust || !pizza.sauce || !pizza.cheese) {
+    alert("This saved pizza is missing some data.");
+    return;
+  }
+  const form = document.getElementById('pizza-form');
+  form.crust.value = pizza.crust;
+  form.sauce.value = pizza.sauce;
+  form.cheese.value = pizza.cheese;
+  form.querySelectorAll('input[name="toppings"]').forEach(input => {
+    input.checked = pizza.toppings.includes(input.value);
+  });
+  updatePrice();
+  updatePreview();
+}
+
+function showToast(message) {
+  const toast = document.getElementById('toast');
+  toast.textContent = message;
+  toast.classList.add('show');
+  setTimeout(() => {
+    toast.classList.remove('show');
+  }, 2500);
+}
+
 document.getElementById('save-btn').addEventListener('click', () => {
   const name = prompt("Name your pizza:");
   if (!name) return;
-
   const data = new FormData(document.getElementById('pizza-form'));
-
-  // Basic validation
   if (!data.get('crust') || !data.get('sauce') || !data.get('cheese')) {
     alert("Please select a crust, sauce, and cheese before saving your pizza.");
     return;
   }
-
   const pizza = {
     crust: data.get('crust'),
     sauce: data.get('sauce'),
     cheese: data.get('cheese'),
     toppings: data.getAll('toppings')
   };
-
   savePizza(name, pizza);
   displaySavedPizzas();
+  showToast("Pizza saved!");
 });
 
-// Load saved pizzas when the page loads
+document.getElementById('print-btn').addEventListener('click', () => {
+  const data = new FormData(document.getElementById('pizza-form'));
+  document.getElementById('receipt-crust').textContent = data.get('crust');
+  document.getElementById('receipt-sauce').textContent = data.get('sauce');
+  document.getElementById('receipt-cheese').textContent = data.get('cheese');
+  document.getElementById('receipt-toppings').textContent = data.getAll('toppings').join(', ');
+  const toppingCount = data.getAll('toppings').length;
+  const price = 8 + toppingCount * 0.5;
+  document.getElementById('receipt-price').textContent = price.toFixed(2);
+  const receipt = document.getElementById('receipt');
+  receipt.style.display = 'block';
+  window.print();
+  receipt.style.display = 'none';
+});
+
 document.addEventListener('DOMContentLoaded', () => {
   fetch('data/ingredients.json')
     .then(response => {
-      if (!response.ok) {
-        throw new Error('Failed to load ingredients.');
-      }
+      if (!response.ok) throw new Error('Failed to load ingredients.');
       return response.json();
     })
     .then(ingredients => {
@@ -83,60 +111,10 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
   document.getElementById('pizza-form').addEventListener('change', () => {
-  updatePrice();
-  updatePreview();
-});
-
-  updatePrice();
-  updatePreview();
-
-  document.getElementById('pizza-form').addEventListener('change', updatePrice);
+    updatePrice();
+    updatePreview();
+  });
   displaySavedPizzas();
   updatePrice();
+  updatePreview();
 });
-
-
-// Print receipt
-document.getElementById('print-btn').addEventListener('click', () => {
-  const data = new FormData(document.getElementById('pizza-form'));
-
-  document.getElementById('receipt-crust').textContent = data.get('crust');
-  document.getElementById('receipt-sauce').textContent = data.get('sauce');
-  document.getElementById('receipt-cheese').textContent = data.get('cheese');
-  document.getElementById('receipt-toppings').textContent = data.getAll('toppings').join(', ');
-
-  const toppingCount = data.getAll('toppings').length;
-  const price = 8 + toppingCount * 0.5;
-  document.getElementById('receipt-price').textContent = price.toFixed(2);
-
-  const receipt = document.getElementById('receipt');
-  receipt.style.display = 'block';
-  window.print();
-  receipt.style.display = 'none';
-});
-
-
-function loadPizzaToForm(pizza) {
-  if (!pizza || !pizza.crust || !pizza.sauce || !pizza.cheese) {
-    alert("This saved pizza is missing some data.");
-    return;
-  }
-
-  const form = document.getElementById('pizza-form');
-  form.crust.value = pizza.crust;
-  form.sauce.value = pizza.sauce;
-  form.cheese.value = pizza.cheese;
-
-  form.querySelectorAll('input[name="toppings"]').forEach(input => {
-    input.checked = pizza.toppings.includes(input.value);
-  });
-
-  updatePrice();
-}
-
-function announce(message) {
-  const alertDiv = document.getElementById('alert');
-  alertDiv.textContent = message;
-}
-
-
