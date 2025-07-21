@@ -1,0 +1,298 @@
+<html lang="en" >
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pizza Builder App</title>
+<link rel="stylesheet" href="/Rework/styles.css">
+<body>
+  <header>
+    <h1>Pizza Builder</h1>
+    <div class="user-account">
+      <span id="loyalty-points">0 points</span>
+      <button id="login-button">Login</button>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="pizza-builder">
+      <h2>Create Your Pizza</h2>
+      
+      <div class="builder-container">
+        <div class="options-container">
+          <!-- Size Selection -->
+          <div class="option-section">
+            <h3>Size</h3>
+            <div class="options">
+              <button class="option-btn size-btn selected" data-size="small" data-price="8.99">Small</button>
+              <button class="option-btn size-btn" data-size="medium" data-price="10.99">Medium</button>
+              <button class="option-btn size-btn" data-size="large" data-price="12.99">Large</button>
+              <button class="option-btn size-btn" data-size="x-large" data-price="14.99">X-Large</button>
+            </div>
+          </div>
+
+          <!-- Crust Selection -->
+          <div class="option-section">
+            <h3>Crust</h3>
+            <div class="options">
+              <button class="option-btn crust-btn" data-crust="regular" data-price="0">Regular</button>
+              <button class="option-btn crust-btn" data-crust="thin" data-price="0">Thin</button>
+              <button class="option-btn crust-btn selected" data-crust="stuffed" data-price="2.99">Stuffed</button>
+              <button class="option-btn crust-btn" data-crust="gluten-free" data-price="1.99">Gluten Free</button>
+            </div>
+          </div>
+
+          <!-- Sauce Selection -->
+          <div class="option-section">
+            <h3>Sauce</h3>
+            <div class="options">
+              <button class="option-btn sauce-btn selected" data-sauce="tomato" data-price="0">Tomato</button>
+              <button class="option-btn sauce-btn" data-sauce="bbq" data-price="0.99">BBQ</button>
+              <button class="option-btn sauce-btn" data-sauce="garlic" data-price="0.99">Garlic</button>
+              <button class="option-btn sauce-btn" data-sauce="alfredo" data-price="0.99">Alfredo</button>
+            </div>
+          </div>
+
+          <!-- Cheese Selection -->
+          <div class="option-section">
+            <h3>Cheese</h3>
+            <div class="options">
+              <button class="option-btn cheese-btn" data-cheese="mozzarella" data-price="0">Mozzarella</button>
+              <button class="option-btn cheese-btn" data-cheese="cheddar" data-price="0.99">Cheddar</button>
+              <button class="option-btn cheese-btn selected" data-cheese="parmesan" data-price="0.99">Parmesan</button>
+              <button class="option-btn cheese-btn" data-cheese="vegan" data-price="1.99">Vegan</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Pizza Visualization -->
+        <div class="pizza-preview">
+          <div class="pizza">
+            <div class="pizza-base" style="background-color: rgb(247, 221, 185);"></div>
+            <div class="pizza-sauce" style="background-color: rgb(199, 47, 8);"></div>
+            <div class="pizza-cheese" style="background-color: rgb(240, 224, 160);"></div>
+            <div class="pizza-toppings"><div class="topping-on-pizza ham" data-topping="ham" style="left: 221.38px; top: 179.171px;"></div><div class="topping-on-pizza pineapple" data-topping="pineapple" style="left: 224.234px; top: 204.581px;"></div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Toppings Selection -->
+      <div class="toppings-section">
+        <h3>Toppings <small>($0.99 each)</small></h3>
+        <div class="toppings-container">
+          <div class="topping-item" draggable="true" data-topping="pepperoni" data-price="0.99">
+            <div class="topping-img pepperoni"></div>
+            <span>Pepperoni</span>
+          </div>
+          <div class="topping-item" draggable="true" data-topping="sausage" data-price="0.99">
+            <div class="topping-img sausage"></div>
+            <span>Sausage</span>
+          </div>
+          <div class="topping-item" draggable="true" data-topping="mushrooms" data-price="0.99">
+            <div class="topping-img mushrooms"></div>
+            <span>Mushrooms</span>
+          </div>
+          <div class="topping-item" draggable="true" data-topping="onions" data-price="0.99">
+            <div class="topping-img onions"></div>
+            <span>Onions</span>
+          </div>
+          <div class="topping-item" draggable="true" data-topping="peppers" data-price="0.99">
+            <div class="topping-img peppers"></div>
+            <span>Peppers</span>
+          </div>
+          <div class="topping-item" draggable="true" data-topping="olives" data-price="0.99">
+            <div class="topping-img olives"></div>
+            <span>Olives</span>
+          </div>
+          <div class="topping-item" draggable="true" data-topping="bacon" data-price="0.99">
+            <div class="topping-img bacon"></div>
+            <span>Bacon</span>
+          </div>
+          <div class="topping-item" draggable="true" data-topping="ham" data-price="0.99">
+            <div class="topping-img ham"></div>
+            <span>Ham</span>
+          </div>
+          <div class="topping-item" draggable="true" data-topping="pineapple" data-price="0.99">
+            <div class="topping-img pineapple"></div>
+            <span>Pineapple</span>
+          </div>
+          <div class="topping-item" draggable="true" data-topping="spinach" data-price="0.99">
+            <div class="topping-img spinach"></div>
+            <span>Spinach</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="order-summary">
+      <h2>Order Summary</h2>
+      <div class="summary-details">
+        <div class="summary-item">
+          <span>Size:</span>
+          <span id="summary-size">Small</span>
+        </div>
+        <div class="summary-item">
+          <span>Crust:</span>
+          <span id="summary-crust">Stuffed</span>
+        </div>
+        <div class="summary-item">
+          <span>Sauce:</span>
+          <span id="summary-sauce">Tomato</span>
+        </div>
+        <div class="summary-item">
+          <span>Cheese:</span>
+          <span id="summary-cheese">Parmesan</span>
+        </div>
+        <div class="summary-item">
+          <span>Toppings:</span>
+          <span id="summary-toppings">Ham, Pineapple</span>
+        </div>
+      </div>
+
+      <div class="nutritional-info">
+        <h3>Nutritional Information</h3>
+        <div class="nutrition-details">
+          <div class="nutrition-item">
+            <span>Calories:</span>
+            <span id="nutrition-calories">910</span>
+          </div>
+          <div class="nutrition-item">
+            <span>Protein:</span>
+            <span id="nutrition-protein">38g</span>
+          </div>
+          <div class="nutrition-item">
+            <span>Carbs:</span>
+            <span id="nutrition-carbs">119g</span>
+          </div>
+          <div class="nutrition-item">
+            <span>Fat:</span>
+            <span id="nutrition-fat">29g</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="price-section">
+        <div class="price-item">
+          <span>Subtotal:</span>
+          <span id="price-subtotal">$14.95</span>
+        </div>
+        <div class="price-item">
+          <span>Tax:</span>
+          <span id="price-tax">$1.20</span>
+        </div>
+        <div class="price-item total">
+          <span>Total:</span>
+          <span id="price-total">$16.15</span>
+        </div>
+      </div>
+
+      <div class="recommendations">
+        <h3>You might also like</h3>
+        <div class="recommendation-items">
+          <!-- Recommendations will be populated by JavaScript -->
+        </div>
+      </div>
+
+      <button id="checkout-btn" class="btn-primary">Proceed to Checkout</button>
+    </section>
+  </main>
+
+  <!-- Checkout Modal -->
+  <div id="checkout-modal" class="modal">
+    <div class="modal-content">
+      <span class="close-modal">×</span>
+      <h2>Checkout</h2>
+      
+      <div class="checkout-form">
+        <div class="form-section">
+          <h3>Delivery Information</h3>
+          <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" id="name" required="">
+          </div>
+          <div class="form-group">
+            <label for="address">Address</label>
+            <input type="text" id="address" required="">
+          </div>
+          <div class="form-group">
+            <label for="phone">Phone</label>
+            <input type="tel" id="phone" required="">
+          </div>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" required="">
+          </div>
+        </div>
+
+        <div class="form-section">
+          <h3>Payment Information</h3>
+          <div class="payment-options">
+            <div class="payment-option">
+              <input type="radio" id="credit-card" name="payment" checked="">
+              <label for="credit-card">Credit Card</label>
+            </div>
+            <div class="payment-option">
+              <input type="radio" id="paypal" name="payment">
+              <label for="paypal">PayPal</label>
+            </div>
+            <div class="payment-option">
+              <input type="radio" id="cash" name="payment">
+              <label for="cash">Cash on Delivery</label>
+            </div>
+          </div>
+
+          <div id="credit-card-details">
+            <div class="form-group">
+              <label for="card-number">Card Number</label>
+              <input type="text" id="card-number" placeholder="XXXX XXXX XXXX XXXX">
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="expiry">Expiry Date</label>
+                <input type="text" id="expiry" placeholder="MM/YY">
+              </div>
+              <div class="form-group">
+                <label for="cvv">CVV</label>
+                <input type="text" id="cvv" placeholder="XXX">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="loyalty-redemption">
+          <h3>Loyalty Program</h3>
+          <div class="form-group">
+            <input type="checkbox" id="use-points" disabled="">
+            <label for="use-points">Use 100 points for $5 off</label>
+            <span id="available-points">(0 points available)</span>
+          </div>
+        </div>
+
+        <div class="order-total">
+          <div class="price-item">
+            <span>Order Total:</span>
+            <span id="checkout-total">$16.15</span>
+          </div>
+        </div>
+
+        <button id="place-order-btn" class="btn-primary">Place Order</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Order Confirmation Modal -->
+  <div id="confirmation-modal" class="modal">
+    <div class="modal-content">
+      <span class="close-modal">×</span>
+      <h2>Order Confirmed!</h2>
+      <p>Your delicious pizza is on its way.</p>
+      <p>Estimated delivery time: <span id="delivery-time">30-45 minutes</span></p>
+      <p>Thank you for your order!</p>
+      <p>You've earned <span id="earned-points">10</span> loyalty points!</p>
+      <button id="new-order-btn" class="btn-primary">Start New Order</button>
+    </div>
+  </div>
+
+<script src="app.js"></script>
+</body>
+</head>
+</html>
